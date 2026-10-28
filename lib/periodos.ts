@@ -13,7 +13,8 @@ export const nomeMesL = (mes: string, en = false) => `${(en ? MONTHS : MESES)[Nu
 const fmt = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4)}`;
 
 /** Guias Mensais: o mês de referência é o mês anterior ao do envio (dia 10). */
-export const mesGuiasPadrao = () => somaMes(hojeISO().slice(0, 7), -1);
+/** Até dia 20 ainda se trabalha nas guias do mês anterior; depois disso, já nas do mês corrente. */
+export const mesGuiasPadrao = () => { const h = hojeISO(); return Number(h.slice(8, 10)) > 20 ? h.slice(0, 7) : somaMes(h.slice(0, 7), -1); };
 
 export function tituloEnvio(tipo: TipoEnvio, periodo: string): string {
   if (tipo === "guias") return `Guias Mensais · ${nomeMesL(periodo)}`;
