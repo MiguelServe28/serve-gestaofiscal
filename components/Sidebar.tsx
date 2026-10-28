@@ -1,0 +1,85 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Building, Landmark, ExternalLink, FileStack, History, KeyRound, LayoutDashboard, LogOut, Mail, Send } from "lucide-react";
+import { sair } from "@/app/actions";
+
+const GRUPOS = [
+  {
+    titulo: "Envios",
+    itens: [
+      { href: "/", label: "Painel", icon: LayoutDashboard },
+      { href: "/guias", label: "Guias Mensais", icon: FileStack },
+      { href: "/imi", label: "IMI", icon: Building },
+      { href: "/aimi", label: "AIMI", icon: Landmark },
+      { href: "/avulsos", label: "Envios avulsos", icon: Send },
+    ],
+  },
+  {
+    titulo: "Registo",
+    itens: [
+      { href: "/historico", label: "Histórico", icon: History },
+      { href: "/modelos", label: "Modelos de email", icon: Mail },
+    ],
+  },
+];
+
+export default function Sidebar({ email, demo, plataforma }: { email: string | null; demo: boolean; plataforma?: string }) {
+  const path = usePathname();
+  const ativo = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
+  return (
+    <aside className="fixed inset-y-0 left-0 z-30 flex w-64 flex-col bg-navy text-white">
+      <div className="px-6 pb-5 pt-7">
+        <div className="flex items-baseline gap-1">
+          <span className="text-2xl font-bold tracking-[0.08em]">SERVE</span>
+          <span className="h-2 w-2 rounded-full bg-laranja" />
+        </div>
+        <p className="mt-1 text-xs text-white/60">Gestão Fiscal</p>
+      </div>
+      <nav className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">
+        {GRUPOS.map((g) => (
+          <div key={g.titulo}>
+            <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">{g.titulo}</p>
+            <ul className="space-y-0.5">
+              {g.itens.map(({ href, label, icon: Icon }) => (
+                <li key={href}>
+                  <Link href={href} className={`group flex items-center gap-3 rounded-lg px-3 py-[7px] text-sm transition ${ativo(href) ? "bg-white/10 font-medium text-white" : "text-white/70 hover:bg-white/5 hover:text-white"}`}>
+                    <span className={`h-5 w-0.5 rounded-full ${ativo(href) ? "bg-laranja" : "bg-transparent"}`} />
+                    <Icon size={16} className={ativo(href) ? "text-laranja" : "text-white/50 group-hover:text-white/80"} />
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        {plataforma && (
+          <div>
+            <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">SERVE</p>
+            <a href={plataforma} className="group flex items-center gap-3 rounded-lg px-3 py-[7px] text-sm text-white/70 hover:bg-white/5 hover:text-white">
+              <span className="h-5 w-0.5" /><ExternalLink size={16} className="text-white/50" />Plataforma SERVE
+            </a>
+          </div>
+        )}
+      </nav>
+      <div className="border-t border-white/10 px-5 py-4 text-xs">
+        {demo ? (
+          <div className="rounded-lg bg-laranja/15 px-3 py-2 text-[11px] leading-snug text-laranja-claro">
+            <strong className="block text-laranja">Modo demonstração</strong>
+            Dados fictícios. Ligue o Supabase para guardar dados reais.
+          </div>
+        ) : (
+          <div className="flex items-center justify-between gap-2">
+            <Link href="/conta" className="flex min-w-0 items-center gap-2 text-white/60 hover:text-white" title="A minha conta">
+              <KeyRound size={14} className="shrink-0" /><span className="truncate">{email}</span>
+            </Link>
+            <form action={sair}>
+              <button className="rounded-md p-1.5 text-white/60 hover:bg-white/10 hover:text-white" title="Sair"><LogOut size={15} /></button>
+            </form>
+          </div>
+        )}
+      </div>
+    </aside>
+  );
+}
