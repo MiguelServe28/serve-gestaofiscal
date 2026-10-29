@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Filtros from "@/components/Filtros";
 import EnvioPagina from "@/components/EnvioPagina";
 import { PageHeader } from "@/components/ui";
 import { hojeISO } from "@/lib/dates";
@@ -13,10 +13,8 @@ export default async function Aimi({ searchParams }: { searchParams: Promise<{ a
   return (
     <>
       <PageHeader eyebrow="Gestão Fiscal" titulo="AIMI" descricao="Adicional ao IMI: pagamento único, até 30 de setembro.">
-        <div className="flex rounded-lg border border-filete bg-white p-0.5 text-sm shadow-card">
-          {[Number(ano) - 1, Number(ano), Number(ano) + 1].map((a) => <Link key={a} href={`/aimi?ano=${a}`} className={`rounded-md px-3 py-1.5 ${String(a) === ano ? "bg-navy text-white" : "hover:bg-banda"}`}>{a}</Link>)}
-        </div>
       </PageHeader>
+      <Filtros campos={[{ nome: "ano", label: "Ano", valor: ano, largura: "w-32", opcoes: [Number(ano) - 1, Number(ano), Number(ano) + 1].map((a) => ({ value: String(a), label: String(a) })) }]} />
       <EnvioPagina envio={envio} />
     </>
   );
