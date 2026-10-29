@@ -34,10 +34,10 @@ export default function Sidebar({ recolhido = false, email, demo, plataforma }: 
       <BotaoMenu inicial={recolhido} />
       <div className="px-6 pb-5 pt-7">
         <div className="flex items-baseline gap-1">
-          <span className="menu-texto text-2xl font-bold tracking-[0.08em]">SERVE</span><span className="menu-icone text-2xl font-bold">S</span>
-          <span className="h-2 w-2 rounded-full bg-laranja" />
+          <img src="/logo-serve-branco.png" alt="SERVE" className="menu-texto h-6 w-auto" /><span className="menu-icone text-2xl font-bold">S</span>
+          <span className="menu-icone h-2 w-2 rounded-full bg-laranja" />
         </div>
-        <p className="menu-texto mt-1 text-xs text-white/60">Gestão Fiscal</p>
+        <p className="menu-texto mt-2 text-xs text-white/60">Gestão Fiscal</p>
       </div>
       <nav className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">
         {GRUPOS.map((g) => (

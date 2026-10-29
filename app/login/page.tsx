@@ -4,10 +4,7 @@ export default function Login() {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="relative hidden flex-col justify-between bg-navy p-12 text-white lg:flex">
-        <div className="flex items-baseline gap-1">
-          <span className="text-3xl font-bold tracking-[0.08em]">SERVE</span>
-          <span className="h-2.5 w-2.5 rounded-full bg-laranja" />
-        </div>
+        <img src="/logo-serve-branco.png" alt="SERVE" className="h-9 w-auto self-start" />
         <div>
           <p className="eyebrow mb-3">Plataforma interna</p>
           <h1 className="max-w-md text-4xl font-semibold leading-tight text-white">Gestão Fiscal: guias e documentos aos clientes, num só envio.</h1>
