@@ -10,6 +10,7 @@ import { getSessao, podeAceder } from "@/lib/sessao";
 import { store } from "@/lib/store";
 import { supabaseServer, temSupabase } from "@/lib/supabase/server";
 import type { Documento } from "@/lib/types";
+import { destino } from "@/lib/types";
 
 const txt = (f: FormData, k: string) => String(f.get(k) ?? "").trim();
 
@@ -98,7 +99,7 @@ export async function enviarCliente(envioId: string, nif: string): Promise<Resul
   const c = clientes.find((x) => x.nif === nif);
   if (!envio || !c) return { nif, ok: false, detalhe: "Cliente ou envio não encontrado." };
   const meus = docs.filter((d) => d.nif === nif);
-  const para = emailsDe(c.email);
+  const para = emailsDe(destino(c));
   const registar = async (ok: boolean, detalhe: string, assunto: string | null, cc: string[]) => {
     await store.registarEmail({ envio_id: envioId, nif, estado: ok ? "enviado" : "erro", detalhe, para: para.join(", "), cc: cc.join(", "), assunto, enviado_por: s.userId, enviado_por_email: s.email });
     return { nif, ok, detalhe };

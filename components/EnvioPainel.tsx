@@ -9,6 +9,7 @@ import { analisar, CATEGORIAS } from "@/lib/leitura";
 import { lerTextoPdf } from "@/lib/ler-pdf";
 import { emailsDe, montarEmail, nomesAnexos } from "@/lib/modelos";
 import type { Cliente, Documento, EmailLog, Envio, Modelo } from "@/lib/types";
+import { destino } from "@/lib/types";
 
 type Pendente = { chave: string; ficheiro: File; nif: string; categoria: string; valor: number | null; aviso: string };
 type Estado = { ok: boolean; detalhe: string; quando: string; por: string | null };
@@ -47,7 +48,7 @@ export default function EnvioPainel({ envio, clientes, documentos, emails, esper
       const c = porNif.get(nif)!;
       const meus = docs.filter((d) => d.nif === nif);
       const est = estados[nif];
-      const semEmail = !emailsDe(c.email).length;
+      const semEmail = !emailsDe(destino(c)).length;
       const falta = envio.tipo === "guias" && esperados.includes(nif) && !meus.some((d) => d.categoria === "DMR" || d.categoria === "DRI");
       const pronto = !semEmail && (meus.length > 0 || envio.tipo === "avulso") && !est?.ok;
       return { c, meus, est, semEmail, falta, pronto };
@@ -191,7 +192,7 @@ export default function EnvioPainel({ envio, clientes, documentos, emails, esper
                       onChange={() => setSel(selecionados.includes(c.nif) ? selecionados.filter((n) => n !== c.nif) : [...selecionados, c.nif])} /></td>
                     <td className="td">
                       <p className="font-medium text-tinta">{c.nome}</p>
-                      <p className="text-xs text-cinza">{c.nif} · {semEmail ? <span className="text-rose-600">sem email na ficha</span> : c.email}{c.lingua === "EN" ? " · EN" : ""}</p>
+                      <p className="text-xs text-cinza">{c.nif} · {semEmail ? <span className="text-rose-600">sem email na ficha</span> : destino(c)}{c.lingua === "EN" ? " · EN" : ""}</p>
                     </td>
                     <td className="td">
                       <div className="flex flex-wrap gap-1">

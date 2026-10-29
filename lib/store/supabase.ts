@@ -22,7 +22,7 @@ const hash = async (b: Uint8Array) => (await import("node:crypto")).createHash("
 export const supabaseStore: Store = {
   async listClientes() {
     const sb = await supabaseServer();
-    const r = await todas<Cliente>((a, b) => sb.from("clientes").select("nif,nome,email,lingua,gestor_nome,gestor_email").order("nome").range(a, b));
+    const r = await todas<Cliente>((a, b) => sb.from("clientes").select("nif,nome,email,email_envio,lingua,gestor_nome,gestor_email").order("nome").range(a, b));
     return r.map((c) => ({ ...c, email: c.email ?? "", lingua: c.lingua === "EN" ? "EN" : "PT", gestor_nome: c.gestor_nome ?? "", gestor_email: c.gestor_email ?? "" }));
   },
   async esperadosGuias() {
