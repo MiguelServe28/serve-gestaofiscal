@@ -24,3 +24,15 @@
   .td { @apply px-3 py-2.5 text-sm; }
   .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-laranja; }
 }
+
+/* Menu lateral recolhido */
+.menu-icone { display: none; }
+[data-menu-raiz] aside, [data-menu-raiz] main { transition: width .15s ease, padding-left .15s ease; }
+[data-menu=recolhido] aside { width: 4rem; }
+[data-menu=recolhido] main { padding-left: 4rem; }
+[data-menu=recolhido] .menu-texto { display: none; }
+[data-menu=recolhido] .menu-icone { display: inline; }
+[data-menu=recolhido] aside nav { padding-left: .5rem; padding-right: .5rem; }
+[data-menu=recolhido] aside nav a { justify-content: center; gap: 0; padding-left: 0; padding-right: 0; }
+[data-menu=recolhido] aside > a:first-of-type { padding-left: 0; padding-right: 0; text-align: center; }
+[data-menu=recolhido] aside > a:first-of-type > div { justify-content: center; }

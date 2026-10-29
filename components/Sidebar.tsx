@@ -1,5 +1,6 @@
 "use client";
 
+import BotaoMenu from "@/components/BotaoMenu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Building, Landmark, ExternalLink, FileStack, History, KeyRound, LayoutDashboard, LogOut, Mail, Send } from "lucide-react";
@@ -25,29 +26,30 @@ const GRUPOS = [
   },
 ];
 
-export default function Sidebar({ email, demo, plataforma }: { email: string | null; demo: boolean; plataforma?: string }) {
+export default function Sidebar({ recolhido = false, email, demo, plataforma }: { recolhido?: boolean;  email: string | null; demo: boolean; plataforma?: string }) {
   const path = usePathname();
   const ativo = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
   return (
     <aside className="fixed inset-y-0 left-0 z-30 flex w-64 flex-col bg-navy text-white">
+      <BotaoMenu inicial={recolhido} />
       <div className="px-6 pb-5 pt-7">
         <div className="flex items-baseline gap-1">
-          <span className="text-2xl font-bold tracking-[0.08em]">SERVE</span>
+          <span className="menu-texto text-2xl font-bold tracking-[0.08em]">SERVE</span><span className="menu-icone text-2xl font-bold">S</span>
           <span className="h-2 w-2 rounded-full bg-laranja" />
         </div>
-        <p className="mt-1 text-xs text-white/60">Gestão Fiscal</p>
+        <p className="menu-texto mt-1 text-xs text-white/60">Gestão Fiscal</p>
       </div>
       <nav className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">
         {GRUPOS.map((g) => (
           <div key={g.titulo}>
-            <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">{g.titulo}</p>
+            <p className="menu-texto px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">{g.titulo}</p>
             <ul className="space-y-0.5">
               {g.itens.map(({ href, label, icon: Icon }) => (
-                <li key={href}>
+                <li key={href} title={label}>
                   <Link href={href} className={`group flex items-center gap-3 rounded-lg px-3 py-[7px] text-sm transition ${ativo(href) ? "bg-white/10 font-medium text-white" : "text-white/70 hover:bg-white/5 hover:text-white"}`}>
                     <span className={`h-5 w-0.5 rounded-full ${ativo(href) ? "bg-laranja" : "bg-transparent"}`} />
                     <Icon size={16} className={ativo(href) ? "text-laranja" : "text-white/50 group-hover:text-white/80"} />
-                    {label}
+                    <span className="menu-texto truncate">{label}</span>
                   </Link>
                 </li>
               ))}
@@ -56,14 +58,14 @@ export default function Sidebar({ email, demo, plataforma }: { email: string | n
         ))}
         {plataforma && (
           <div>
-            <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">SERVE</p>
+            <p className="menu-texto px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">SERVE</p>
             <a href={plataforma} className="group flex items-center gap-3 rounded-lg px-3 py-[7px] text-sm text-white/70 hover:bg-white/5 hover:text-white">
               <span className="h-5 w-0.5" /><ExternalLink size={16} className="text-white/50" />Plataforma SERVE
             </a>
           </div>
         )}
       </nav>
-      <div className="border-t border-white/10 px-5 py-4 text-xs">
+      <div className="menu-texto border-t border-white/10 px-5 py-4 text-xs">
         {demo ? (
           <div className="rounded-lg bg-laranja/15 px-3 py-2 text-[11px] leading-snug text-laranja-claro">
             <strong className="block text-laranja">Modo demonstração</strong>
