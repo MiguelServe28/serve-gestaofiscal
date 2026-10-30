@@ -16,7 +16,7 @@ export default async function Imi({ searchParams }: { searchParams: Promise<{ an
   const envio = await store.obterOuCriarEnvio("imi", periodo, tituloEnvio("imi", periodo), (await getSessao()).userId);
   return (
     <>
-      <PageHeader eyebrow="Gestão Fiscal" titulo="IMI" descricao="Notas de cobrança do IMI por prestação (31 de maio, 31 de agosto, 30 de novembro).">
+      <PageHeader eyebrow="Gestão Fiscal" titulo="IMI" descricao="Notas de cobrança do IMI, por prestação.">
       </PageHeader>
       <Filtros campos={[
         { nome: "ano", label: "Ano", valor: ano, largura: "w-32", opcoes: [Number(ano) - 1, Number(ano), Number(ano) + 1].map((a) => ({ value: String(a), label: String(a) })) },

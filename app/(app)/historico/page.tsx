@@ -12,7 +12,7 @@ export default async function Historico({ searchParams }: { searchParams: Promis
   const lista = emails.filter((e) => !q || e.nif.includes(q) || (nome.get(e.nif) ?? "").toLowerCase().includes(q) || (e.para ?? "").toLowerCase().includes(q));
   return (
     <>
-      <PageHeader eyebrow="Registo" titulo="Histórico" descricao="Todos os emails enviados (e os que falharam), com quem enviou e para onde." />
+      <PageHeader eyebrow="Registo" titulo="Histórico" descricao="Todos os emails enviados e os que falharam." />
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <form action="/historico"><input name="q" defaultValue={sp.q} className="input w-72" placeholder="Cliente, NIF ou email" /></form>
         <a href={sp.ver === "antigo" ? "/historico" : "/historico?ver=antigo"} className="btn-ghost">{sp.ver === "antigo" ? "Ver envios atuais" : "Ver registo da Gestão Fiscal antiga"}</a>

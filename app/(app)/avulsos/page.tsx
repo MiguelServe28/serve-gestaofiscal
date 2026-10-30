@@ -9,7 +9,7 @@ export default async function Avulsos() {
   const envios = (await store.listEnvios()).filter((e) => e.tipo === "avulso");
   return (
     <>
-      <PageHeader eyebrow="Gestão Fiscal" titulo="Envios avulsos" descricao="Avisos e documentos pontuais: por exemplo, o valor trimestral da Segurança Social dos trabalhadores independentes ou um comunicado a vários clientes." />
+      <PageHeader eyebrow="Gestão Fiscal" titulo="Envios avulsos" descricao="Avisos e documentos pontuais, para um ou vários clientes." />
       <form action={criarAvulso} className="card mb-8 grid gap-3 p-5 md:grid-cols-[1fr_2fr_auto] md:items-end">
         <div><label className="label">Título (assunto do email)</label><input name="titulo" required className="input" placeholder="ex.: Segurança Social · 4.º trimestre 2026" /></div>
         <div><label className="label">Mensagem</label><textarea name="mensagem" rows={2} className="input" placeholder="Texto que vai no corpo do email" /></div>

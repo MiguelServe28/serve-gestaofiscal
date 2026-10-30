@@ -10,7 +10,7 @@ export default async function EnvioAvulso({ params }: { params: Promise<{ id: st
   if (!envio) notFound();
   return (
     <>
-      <PageHeader eyebrow="Envio avulso" titulo={envio.titulo} descricao="Largue os documentos (se houver) e acrescente os clientes que devem receber o aviso.">
+      <PageHeader eyebrow="Envio avulso" titulo={envio.titulo} descricao="Junte os documentos e escolha os clientes que recebem o aviso.">
         <ApagarEnvio id={envio.id} />
       </PageHeader>
       {envio.tipo === "avulso" && (

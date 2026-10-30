@@ -22,7 +22,7 @@ export default async function Painel() {
   const mes = mesGuiasPadrao();
   return (
     <>
-      <PageHeader eyebrow="Gestão Fiscal" titulo="Painel" descricao="Envio em lote de guias e documentos aos clientes. Cada cliente recebe um único email com todos os seus documentos." />
+      <PageHeader eyebrow="Gestão Fiscal" titulo="Painel" descricao="Envio em lote de guias e documentos aos clientes." />
       <div className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Atalho href="/guias" icon={FileStack} titulo="Guias Mensais" texto={`Guias de ${nomeMesL(mes)}`} />
         <Atalho href="/imi" icon={Building} titulo="IMI" texto="Notas de cobrança por prestação" />

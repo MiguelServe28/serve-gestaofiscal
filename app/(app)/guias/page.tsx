@@ -12,7 +12,7 @@ export default async function Guias({ searchParams }: { searchParams: Promise<{ 
   return (
     <>
       <PageHeader eyebrow="Gestão Fiscal" titulo="Guias Mensais"
-        descricao={`Guias de ${nomeMesL(mes)} (envio a 10 do mês seguinte): DMR, DRI, retenções, Imposto do Selo, IUC e outros. Cada cliente recebe um único email com tudo.`}>
+        descricao={`Guias de ${nomeMesL(mes)}, a enviar até dia 10 do mês seguinte. Cada cliente recebe um único email com tudo.`}>
         <MonthNav mes={mes} base="/guias" inicio="2026-09" />
       </PageHeader>
       <EnvioPagina envio={envio} />

@@ -14,7 +14,7 @@ export default async function Modelos() {
   const atuais = await store.listModelos();
   return (
     <>
-      <PageHeader eyebrow="Registo" titulo="Modelos de email" descricao="Texto de cada tipo de envio, em português e em inglês (vai na língua definida na ficha do cliente). As palavras entre chavetas são preenchidas automaticamente." />
+      <PageHeader eyebrow="Registo" titulo="Modelos de email" descricao="O texto de cada tipo de envio, em português e em inglês. As palavras entre chavetas são preenchidas automaticamente." />
       <div className="space-y-6">
         {Object.entries(INFO).map(([tipo, info]) => {
           const m = atuais.find((x) => x.tipo === tipo) ?? MODELOS_PADRAO.find((x) => x.tipo === tipo)!;
